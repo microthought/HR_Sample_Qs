@@ -1,8 +1,11 @@
 /* INSTRUCTIONS
 
-Create a function, getVillainName, that returns a villain name based on the user's birthday. (The birthday will be passed to the function as a valid Date object, so for simplicity, there's no need to worry about converting strings to dates.)
+Create a function, getVillainName, that returns a villain name based on the user's birthday. 
+(The birthday will be passed to the function as a valid Date object, so for simplicity, 
+there's no need to worry about converting strings to dates.)
 
-The first name will come from the month, and the last name will come from the last digit of the date.
+The first name will come from the month, and the last name will come from the last digit of 
+the date.
 
 Month -> first name
 
@@ -35,30 +38,44 @@ The returned value should be a string in the form of "First Name Last Name".
 For example, a birthday of November 18 would return "The Terrifying Teaspoon"
 */
 
+var firstNames = [
+									"The Evil",
+									"The Vile",
+									"The Cruel",
+									"The Trashy",
+									"The Despicable",
+									"The Embarrassing",
+									"The Disreputable",
+									"The Atrocious",
+									"The Twirling",
+									"The Orange",
+									"The Terrifying",
+									"The Awkward"
+								]
 
+var lastNames = [
+									"Mustache",
+									"Pickle",
+									"Hood Ornament",
+									"Raisin",
+									"Recycling Bin",
+									"Potato",
+									"Tomato",
+									"House Cat",
+									"Teaspoon",
+									"Laundry Basket"
+								]
 
-function strongEnough(earthquake, age) {
-	
-	let quakePower = 1;
+function getVillainName(birthday){
+return firstNames[birthday.getMonth()] + " " + lastNames[birthday.getDate() % 10]
 
-	for (let i = 0, length = earthquake.length; i < length; i++) {
-		let shockwavepower = 0;
-		for (let j = 0, l = earthquake[i].length; j < l; j++) {
-			shockwavepower += earthquake[i][j];
-		}
-		quakePower *= shockwavepower;
-	}	
-
-	let buildingStrength = 1000 * Math.pow(.99, age);
-
-	let message = buildingStrength > quakePower ?  "Safe!" :  "Needs Reinforcement!"
-
-	return message;
 }
 
 
 
+var birthday = new Date(1988, 1, 2);
 
+document.write("<h1>I am " + getVillainName(birthday) + "!");
 
 
 
