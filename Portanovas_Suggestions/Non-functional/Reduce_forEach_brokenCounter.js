@@ -21,7 +21,9 @@ var multiplyFn = function (cellValue){
 };
 
 var reduceFn = function(passedInArray, passedInFunction){
-	//I WANT to declare a local counter variable, but everything returns undefined if I do. Scope? Closure? Why doesn't array.forEach have access to this?
+	/*I WANT to declare a local counter variable, but everything returns undefined 
+	if I do. Scope? Closure? Why doesn't array.forEach have access to this? */
+	//var currentTotal = undefined;
 	if (passedInArray instanceof Array && typeof passedInFunction === "function") {
 		passedInArray.forEach(passedInFunction)
 		return currentTotal;

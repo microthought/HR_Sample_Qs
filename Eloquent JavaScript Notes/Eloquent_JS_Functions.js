@@ -181,17 +181,125 @@ timesEm([1,2,3,4])
 
 
 --- --- ------ --- ------ --- 
-Other magic
+      countZeroes
 --- --- ------ --- ------ --- 
 
 
-
+//
 function countZeroes (array) {
   function counter (total, element) {
     return total + (element === 0 ? 1 : 0);
   }
   return reduce (counter, 0, array);
 }
+
+// we could define another algorithm function "COUNT"
+
+function count(test, array) {
+  var counted = 0;
+  forEach(array, function(element) {
+    if (test(element)) counted ++
+  });
+  return counted;
+}
+
+function countZeroes (array) {
+  function isZero(x) {return x === 0;}
+  return count (isZero,array);
+}
+
+
+
+
+
+--- --- ------ --- ------ --- 
+     MAP MAP  MAP MAP
+--- --- ------ --- ------ --- 
+
+
+function map (func, array) {
+  var result = [];
+  forEach(array, function (element) {
+    result.push(func(element));
+  });
+  return result;
+}
+
+
+
+
+
+
+
+--- --- ------ --- ------ --- 
+     Recluse File Processor
+--- --- ------ --- ------ --- 
+//
+var paragraphs = RECLUSEFILE.split("\n\n");
+
+function processParagraph(paragraph) {
+	var header = 0;
+	while (paragraph.charAt(header) == "%")
+		header++;
+	if (header > 0)
+		return {type: "h" + header, content: paragraph.slice(header + 1)};
+	else
+		return {type: "p", content: paragraph};
+}
+
+//call em
+// This would then run process paragraph on EACH paragraph :D
+map(processParagraph, RECLUSEFILE.split("\n\n"));
+
+
+
+//NOW lets find them emphases!
+
+function splitParagraph(text) {
+	function split(pos) {
+		if (pos == text.length) {
+			return [];
+		}
+		else if(text.charAt(pos) == "*") {
+			var end = findClosing("*", pos + 1),
+				frag = {type: "emphasized". content: text.slice(pos +1, end)};
+			return [frag].concat(split(end + 1));
+		}
+		else if(text.charAt(pos) == "{") {
+			var end = findClosing("}", pos + 1),
+				frag = {type: "footnote", content: text.slice(pos + 1, end)};
+			return [frag].concat(split(end + 1));
+		}
+		else {
+			var end = findOpeningOrEnd(pos),
+				frag = {type: "normal", content: text.slice(pos, end)};
+			return [frag].concat(split(end));
+		}
+	}
+
+	function findClosing(character, from) {
+		var end = text.indexOf(character, from);
+		if (end == -1) throw new Error ("Missing closing '" + character + "'");
+		else return end;
+	}
+
+	function findOpeningOrEnd (from) {
+		function indexOrEnd (character) {
+			var index = text.indexOf(character, from);
+			return index == -1 ? text.length : index;
+		}
+		return Math.min(indexOrEnd("*"), indexOrEnd("{"));
+	}
+	return split(0);
+}
+
+
+
+
+
+
+
+
 
 
 
