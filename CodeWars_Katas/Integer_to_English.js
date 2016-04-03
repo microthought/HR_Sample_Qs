@@ -28,10 +28,6 @@ function intToEnglish(number){
     let num = parseInt(numberArray[i]);
     let nextNum = parseInt(numberArray[i-1]);
     switch(i) {
-      case 26:
-      case 23:
-      case 20:
-      case 17:
       case 14:
       case 11:
       case 8:
@@ -41,10 +37,6 @@ function intToEnglish(number){
           resultArray.push(singles[num] + hundy);
         }
         break;
-      case 28:
-      case 25:
-      case 22:
-      case 19:
       case 16:
       case 13:
       case 10:
@@ -62,10 +54,6 @@ function intToEnglish(number){
           }
         }
         break;
-      case 27:
-      case 24:
-      case 21:  
-      case 18:
       case 15:
       case 12:
       case 9:  
@@ -139,7 +127,11 @@ var tripleDigits = [
 ]
 
 
+// For Funsies
 
+var magic = prompt("Give me up to 16 digits");
+
+alert("༼ つ ◕_◕ ༽つ Go Computer Go!!!\n\n" + intToEnglish(magic));
 
 
 
