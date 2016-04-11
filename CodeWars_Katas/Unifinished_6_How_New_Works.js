@@ -5,6 +5,7 @@ The new operator in JavaScript creates objects by following these three steps:
 First, it creates a new empty object. (Already done for you here.)
 Next, it sets the new object’s .__proto__ property to match the prototype 
 property of the function being invoked.
+
 Finally, the operator invokes the function and passes the new object as the 
 “this” reference.
 
@@ -24,4 +25,24 @@ understand what this kata is trying to teach you.
 // but do not use the 'new' operator.
 //
 // Start with a simple empty Object literal.
+
+
+//Passes 1, 3 & 4
 var myObj = {};
+myObj.__proto__ = Object.create(MyObject.prototype);
+
+
+//Passes 1, 3 & 4
+var myObj = Object.create(MyObject.prototype, MyObject);
+
+//Passes 1, 3 & 4
+var myObj = {};
+myObj.__proto__ = MyObject.prototype;
+
+myObj.constructor = MyObject();
+
+
+
+
+
+
