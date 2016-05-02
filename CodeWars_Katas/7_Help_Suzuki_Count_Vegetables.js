@@ -34,6 +34,44 @@ is the same sort in descending alphabetical order.
 */
 
 
+
+function countVegetables(string){
+
+	var veggies = ["cabbage", "carrot", "celery", "cucumber", "mushroom", "onion", "pepper", "potato", 
+"tofu", "turnip"];
+
+	var count = [0,0,0,0,0,0,0,0,0,0];
+
+	var results = [];
+
+	function counter(item){
+		if(veggies.indexOf(item) > -1){
+			++count[veggies.indexOf(item)];
+		}
+	}
+
+	function compile (value, index, arr){
+		if(value) results.push( [value, veggies[index]] );
+	}
+
+	string.split(/\s/).forEach(counter);
+
+	count.forEach(compile);
+
+	return results.sort(function(a,b){
+		if(a[0] > b[0]) return -1;
+		if(a[0] < b[0]) return 1;
+		if(a[1] > b[1]) return -1;
+		if(a[1] < b[1]) return 1;
+		return 0;
+	});
+}
+
+
+
+
+
+// ALMOST! but leaves ZERO counts in output
 function countVegetables(string){
 
 	var veggies = ["cabbage", "carrot", "celery", "cucumber", "mushroom", "onion", "pepper", "potato", 
@@ -47,8 +85,9 @@ function countVegetables(string){
 		}
 	}
 
-	function compile (value, index){
-		return value = [count[index], value];
+	function compile (value, index, arr){
+		if(value) return value = [count[index], value];
+		else delete arr[index];
 	}
 
 	string.split(/\s/).forEach(counter);
@@ -87,6 +126,11 @@ s2 = `mushroom chopsticks chopsticks turnip mushroom carrot mushroom cabbage mus
  mushroom cabbage tofu turnip turnip turnip mushroom tofu potato pepper turnip potato turnip celery carrot turnip`;
 
 
+
+
+Expected: 
+[[1,"tofu"],[1,"pepper"],[1,"onion"],[1,"celery"]], instead got: 
+[[1,"tofu"],[1,"pepper"],[1,"onion"],[1,"celery"],[0,"turnip"],[0,"potato"],[0,"mushroom"],[0,"cucumber"],[0,"carrot"],[0,"cabbage"]]
 
 
 
