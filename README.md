@@ -6,7 +6,7 @@ Will save all the practice problems I find here, all feedback welcome :)
 -Michael
 
 
-
+```javascript
 /*
 //====================\\
 //     Start Here     \\
@@ -70,3 +70,5 @@ var c = function(n){
 }
 
 // a(5); // UNCOMMENT this line to run
+
+```
